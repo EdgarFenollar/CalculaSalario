@@ -10,7 +10,7 @@ public class EmpleadoBR {
             salario = 1500;
         }
 
-        if (ventasMes >= 1000){
+        if (ventasMes >= 1000 && ventasMes < 1500){
             salario += 100;
         } else if (ventasMes >= 1500){
             salario += 200;
@@ -21,7 +21,7 @@ public class EmpleadoBR {
         }
 
         if (tipoEmpleado == null || ventasMes < 0 || horasExtras < 0){
-            return salario = -1;
+            return -1;
         }
         return salario;
     }

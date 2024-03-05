@@ -29,4 +29,29 @@ class EmpleadoBRTest {
     public void calculaSalarioNeto5(){
         assertEquals(840, EmpleadoBR.calculaSalarioNeto(1000), 0.01);
     }
+
+    @Test
+    public void calculaSalarioNeto6(){
+        assertEquals(999, EmpleadoBR.calculaSalarioNeto(999));
+    }
+
+    @Test
+    public void calculaSalarioNeto7(){
+        assertEquals(500, EmpleadoBR.calculaSalarioNeto(500));
+    }
+
+    @Test
+    public void calculaSalarioNeto8(){
+        assertEquals(0, EmpleadoBR.calculaSalarioNeto(0));
+    }
+
+    @Test
+    public void calculaSalarioNeto9(){
+        assertEquals(-1, EmpleadoBR.calculaSalarioNeto(-1));
+    }
+
+    @Test
+    public void calculaSalarioBruto1(){
+        assertEquals(1360, EmpleadoBR.calculaSalarioBruto(TipoEmpleado.vendedor, 2000, 8));
+    }
 }
