@@ -1,10 +1,17 @@
 package es.iesmz;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class EmpleadoBRTest {
+
+    @BeforeEach
+    public void before(){
+        System.out.println("EXECUTE PROVA");
+    }
+
     // 1 Commit
     @Test
     public void calculaSalarioNeto1(){
