@@ -2,6 +2,9 @@ package es.iesmz;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,5 +114,40 @@ class EmpleadoBRTest {
     @Test
     public void calculaSalarioBruto11(){
         assertEquals(-1, EmpleadoBR.calculaSalarioBruto(null, 1500, 8));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "datos_empleados.csv", numLinesToSkip = 1)
+    void testCalculaSalarioBruto(float expectedSalarioBruto, TipoEmpleado tipoEmpleado, float ventasMes, float horasExtras) {
+        float salarioBruto = EmpleadoBR.calculaSalarioBruto(tipoEmpleado, ventasMes, horasExtras);
+        assertEquals(expectedSalarioBruto, salarioBruto, 0.001);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "datos_salario_bruto.csv", numLinesToSkip = 1)
+    void testCalculaSalarioNeto(float expectedSalarioNeto, float salarioBruto) {
+        float salarioNeto = EmpleadoBR.calculaSalarioNeto(salarioBruto);
+        assertEquals(expectedSalarioNeto, salarioNeto, 0.001);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "vendedor, 1500, -1, -1",
+            "encargado, 999.99f, 3, 1560"
+    })
+    void testCalculaSalarioBrutoCSV1(TipoEmpleado tipoEmpleado, float ventasMes, float horasExtras, float expectedSalarioBruto) {
+        float salarioBruto = EmpleadoBR.calculaSalarioBruto(tipoEmpleado, ventasMes, horasExtras);
+        assertEquals(expectedSalarioBruto, salarioBruto, 0.001);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "1050,1250",
+            "1230,1500",
+            "999,999"
+    })
+    void testCalculaSalarioBrutoCSV2(float expectedSalarioNeto, float salarioBruto) {
+        float salarioNeto = EmpleadoBR.calculaSalarioNeto(salarioBruto);
+        assertEquals(expectedSalarioNeto, salarioNeto, 0.001);
     }
 }
